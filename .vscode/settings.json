@@ -1,0 +1,21 @@
+{
+    // Enable formatting on save only for Python and use the Ruff extension as the default formatter
+    "[python]": {
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports.ruff": true
+        }
+    },
+
+    // Keep global formatOnSave off to avoid unexpected formatting for other filetypes
+    "editor.formatOnSave": false,
+
+    // Visual ruler at 160 columns with a very faint color (faded gutter)
+    "editor.rulers": [
+        {
+            "column": 160,
+            "color": "#00000014"
+        }
+    ],
+}

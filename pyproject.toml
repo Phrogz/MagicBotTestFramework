@@ -4,6 +4,9 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
+
+# Packages installed by `uv sync` in your local .venv;
+# these are NOT deployed to RoboRIO by `robotpy deploy`.
 dependencies = [
     "robotpy>=2025.3.2.2",
 ]
@@ -11,21 +14,31 @@ dependencies = [
 [tool.robotpy]
 robotpy_version = "2025.3.2.2"
 
-# Extra RobotPy components should be installed equivalent to `pip install robotpy[extra1, ...]
+# Extra RobotPy components to install, locally (via `robotpy sync`) and on the RoboRIO (via `robotpy deploy`).
 robotpy_extras = [
     # "all",
-    # "apriltag",
+    "apriltag",
     # "commands2",
     # "cscore",
     # "navx",
-    # "pathplannerlib",
+    "pathplannerlib",
     # "phoenix5",
-    # "phoenix6",
+    "phoenix6", # Support for the Kraken x60 — https://api.ctr-electronics.com/phoenix6/release/python/index.html
     # "rev",
     # "romi",
-    # "sim",
+    "sim",
     # "xrp",
 ]
 
-# Other pip packages to install
+# Other python packages to install ON the RoboRIO
 requires = []
+
+[tool.ruff]
+line-length = 160 # Allow much longer lines before forcing line wrap via formatting
+src = ["."]
+
+# Enable Ruff's import organizer
+extend-select = ["I"]
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["F401"]
