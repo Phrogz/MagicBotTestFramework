@@ -4,6 +4,7 @@
         "ms-python.vscode-pylance",
         "charliermarsh.ruff",
         "ms-toolsai.jupyter",
-        "GitHub.copilot"
+        "GitHub.copilot",
+        "gruntfuggly.todo-tree",
     ]
 }
