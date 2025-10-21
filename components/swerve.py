@@ -13,6 +13,8 @@ import dimensions as dim
 class SwerveModule:
     """A single serve module."""
 
+    # These attributes are automatically set by MagicBot's variable injection
+    # when attributes of the same name are set on the robot.
     drive_motor: p6.TalonFX
     steer_motor: p6.TalonFX
 
