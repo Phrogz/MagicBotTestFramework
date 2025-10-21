@@ -34,11 +34,33 @@ robotpy_extras = [
 requires = []
 
 [tool.ruff]
-line-length = 160 # Allow much longer lines before forcing line wrap via formatting
+line-length = 120 # Allow much longer lines before forcing line wrap via formatting
 src = ["."]
 
-# Enable Ruff's import organizer
-extend-select = ["I"]
+# Specify the generic rulesets and specific rules for Ruff to enforce
+select = [
+    "I",    # Sort imports
+    "D",    # pydocstyle
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "N",    # pep8-naming
+    "B",    # flake8-bugbear
+    "D200",  # One-line docstring should fit on one line
+    "D201",  # No blank lines before docstring
+    "D202",  # No blank lines after docstring
+    "D210",  # No whitespace before docstring text
+    "D400",  # First line should end with period
+    "D415",  # First line should end with period, question mark, or exclamation point
+]
+
+
+ignore = [
+    "N802"   # Allow camelCase function names (required for MagicBot)
+]
+
+
+[tool.ruff.pydocstyle]
+convention = "google"
 
 [tool.ruff.per-file-ignores]
 "__init__.py" = ["F401"]
