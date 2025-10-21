@@ -11,6 +11,9 @@ class JustLeavePlease(mb.AutonomousStateMachine):
     # Must set a name here for this to be recognized as an auto mode.
     MODE_NAME = "Just Leave"
 
+    # Set this as the default auto mode. [GK: Ick; what if two files have this?]
+    DEFAULT = True
+
     drivetrain: components.Drivetrain
 
     # Start here, and do nothing for 5 seconds.
