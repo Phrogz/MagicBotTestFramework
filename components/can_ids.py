@@ -1,0 +1,15 @@
+"""Identifiers for objects on the CAN bus(es)."""
+
+SWERVE_CAN_NAME = "canivore"  # Configured in Phoenix Tuner X
+
+FRONT_LEFT_DRIVE_ID = 1
+FRONT_LEFT_STEER_ID = 2
+
+FRONT_RIGHT_DRIVE_ID = 3
+FRONT_RIGHT_STEER_ID = 4
+
+REAR_LEFT_DRIVE_ID = 5
+REAR_LEFT_STEER_ID = 6
+
+REAR_RIGHT_DRIVE_ID = 7
+REAR_RIGHT_STEER_ID = 8
