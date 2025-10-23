@@ -3,7 +3,7 @@ name = "test1"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.13,<3.14"
 
 # Packages installed by `uv sync` in your local .venv;
 # these are NOT deployed to RoboRIO by `robotpy deploy`.
