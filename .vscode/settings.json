@@ -5,7 +5,7 @@
         "editor.formatOnSave": true,
         "editor.codeActionsOnSave": {
             "source.organizeImports.ruff": true
-        }
+        },
         // Visual ruler at 120 columns with a very faint color (faded gutter)
         "editor.rulers": [
             {
