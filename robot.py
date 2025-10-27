@@ -95,7 +95,7 @@ class Scurvy(magicbot.MagicRobot):
     def manuallyDrive(self) -> None:
         """Drive the robot based on controller input."""
         # Translate joystick values to speeds
-        strafe_right, forward = self.driver_controller.get_left_stick()
-        rotate_right, _ = self.driver_controller.get_right_stick()
+        strafe_right, forward = self.driver_controller.getLeftStick()
+        rotate_right = self.driver_controller.getRightX()
         self.drivetrain.drive(x_speed=-forward, y_speed=-strafe_right, r_speed=-rotate_right)
         self.drivetrain.use_cross_brake(self.driver_controller.should_brake())
