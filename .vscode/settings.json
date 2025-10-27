@@ -31,4 +31,8 @@
     // Keep global formatOnSave off to avoid unexpected formatting for other filetypes
     "editor.formatOnSave": false,
 
+    "todo-tree.filtering.excludeGlobs": [
+        "/.venv/*/**" // Prevent TODO Tree extension from looking inside the virtual environment
+    ]
+
 }

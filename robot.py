@@ -82,11 +82,11 @@ class Scurvy(magicbot.MagicRobot):
         self.rear_right_swerve_drive_motor = p6.TalonFX(ids.REAR_RIGHT_DRIVE_ID, ids.SWERVE_CAN_NAME)
         self.rear_right_swerve_steer_motor = p6.TalonFX(ids.REAR_RIGHT_STEER_ID, ids.SWERVE_CAN_NAME)
 
-        self.shooter_motor = wpilib.Talon(15)
+        self.shooter_motor = wpilib.Talon(15)  # FIXME: this should not be a hardcoded ID
 
     def createControllers(self) -> None:
         """Set up joystick and gamepad objects here."""
-        self.driver_controller = components.DriverController(0)
+        self.driver_controller = components.DriverController(0)  # FIXME: this should not be a hardcoded port number
 
     def createLights(self) -> None:
         """Set up CAN objects for lights."""
