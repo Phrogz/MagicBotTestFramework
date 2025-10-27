@@ -23,13 +23,29 @@ with the [MagicBot](https://robotpy.readthedocs.io/en/latest/frameworks/magicbot
    ```
 
 3. Open the folder in VS Code.
-   * Though there's little likelihood of conflict, you may wish to create a new VS Code profile with only the recommended VS Code extensions installed.
+   * Though there's little likelihood of conflict, you may wish to create a new
+     [VS Code profile](https://code.visualstudio.com/docs/configure/profiles)
+     with only the recommended VS Code extensions installed.
 
-4. From a Terminal in VS Code, run `robotpy sim` to start the simulator.
+
+## Developing the Robot Code
+
+See lots of sample code in
+[RobotPy Examples](https://github.com/robotpy/examples/tree/main)
+for isolated snippets demonstrating how to accomplish common tasks.
+
+
+## Running the Simulator
+
+Open a Terminal in VS Code (hint: `` ctrl+` ``, or ), and then run `robotpy sim` to start the simulator.
 
    * _Note that when you open a Terminal inside VS Code it should automatically activate the virtual environment for you._
-     _At this point you can just run `robotpy sync` or `robotpy deploy` without the `uv run` prefix._
-     _If the it does not activate the virtual environment automatically, you can run `source .venv/bin/activate`._ 🤮
+     _This is what enables `robotpy` as its own command, without the `uv run` prefix._
 
-   * If you connect a PS4 controller, you should be able to drive the robot around in the simulator using the left and right sticks.
-     Note that you need to drag the controller from the "System Joysticks" window onto "Joystick 0" in the "Joysticks" window to connect the controller to the right joystick "port".
+     _If VS Code does not activate the virtual environment automatically, you can run `source .venv/bin/activate`._ 🤮
+
+   * If you connect a PS4 controller, you should be able to drive the robot around in the simulator
+     using the left and right sticks.
+
+     Note that the first time you will need to drag the controller from the "System Joysticks" window onto
+     "Joystick 0" in the "Joysticks" window to connect the controller to the right joystick "port".
