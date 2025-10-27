@@ -62,6 +62,16 @@ class Drivetrain:
         self.desired_velocity.x = x_speed
         self.desired_velocity.y = y_speed
         self.desired_velocity.r = r_speed
+        print(self.desired_velocity)
+
+    def use_cross_brake(self, should_brake: bool) -> None:
+        """Engage or disengage the cross brake.
+
+        Args:
+            should_brake: Whether to engage the cross brake.
+        """
+        if should_brake:
+            print("Cross brake engaged!")
 
     def execute(self) -> None:
         """Called by MagicBot; cause action for queued up control information."""
