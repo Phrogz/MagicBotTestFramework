@@ -1,11 +1,13 @@
 """Starting point for Robot code."""
 
+import math
+
 import magicbot
 import phoenix6.hardware as p6
 import wpilib
 
 import components
-import components.can_ids as ids
+import constants as const
 
 
 class Scurvy(magicbot.MagicRobot):
@@ -73,20 +75,20 @@ class Scurvy(magicbot.MagicRobot):
         # Because the robot has a component named `front_left_swerve`,
         # and that class has an attribute `drive_motor`,
         # the next line automatically sets the drive_motor value on the specific swerve component.
-        self.front_left_swerve_drive_motor = p6.TalonFX(ids.FRONT_LEFT_DRIVE_ID, ids.SWERVE_CAN_NAME)
-        self.front_left_swerve_steer_motor = p6.TalonFX(ids.FRONT_LEFT_STEER_ID, ids.SWERVE_CAN_NAME)
-        self.front_right_swerve_drive_motor = p6.TalonFX(ids.FRONT_RIGHT_DRIVE_ID, ids.SWERVE_CAN_NAME)
-        self.front_right_swerve_steer_motor = p6.TalonFX(ids.FRONT_RIGHT_STEER_ID, ids.SWERVE_CAN_NAME)
-        self.rear_left_swerve_drive_motor = p6.TalonFX(ids.REAR_LEFT_DRIVE_ID, ids.SWERVE_CAN_NAME)
-        self.rear_left_swerve_steer_motor = p6.TalonFX(ids.REAR_LEFT_STEER_ID, ids.SWERVE_CAN_NAME)
-        self.rear_right_swerve_drive_motor = p6.TalonFX(ids.REAR_RIGHT_DRIVE_ID, ids.SWERVE_CAN_NAME)
-        self.rear_right_swerve_steer_motor = p6.TalonFX(ids.REAR_RIGHT_STEER_ID, ids.SWERVE_CAN_NAME)
+        self.front_left_swerve_drive_motor = p6.TalonFX(const.CANID.FRONT_LEFT_DRIVE, const.SWERVE_CAN_NAME)
+        self.front_left_swerve_steer_motor = p6.TalonFX(const.CANID.FRONT_LEFT_STEER, const.SWERVE_CAN_NAME)
+        self.front_right_swerve_drive_motor = p6.TalonFX(const.CANID.FRONT_RIGHT_DRIVE, const.SWERVE_CAN_NAME)
+        self.front_right_swerve_steer_motor = p6.TalonFX(const.CANID.FRONT_RIGHT_STEER, const.SWERVE_CAN_NAME)
+        self.rear_left_swerve_drive_motor = p6.TalonFX(const.CANID.REAR_LEFT_DRIVE, const.SWERVE_CAN_NAME)
+        self.rear_left_swerve_steer_motor = p6.TalonFX(const.CANID.REAR_LEFT_STEER, const.SWERVE_CAN_NAME)
+        self.rear_right_swerve_drive_motor = p6.TalonFX(const.CANID.REAR_RIGHT_DRIVE, const.SWERVE_CAN_NAME)
+        self.rear_right_swerve_steer_motor = p6.TalonFX(const.CANID.REAR_RIGHT_STEER, const.SWERVE_CAN_NAME)
 
-        self.shooter_motor = wpilib.Talon(15)  # FIXME: this should not be a hardcoded ID
+        self.shooter_motor = wpilib.Talon(const.CANID.SHOOTER_MOTOR)
 
     def createControllers(self) -> None:
         """Set up joystick and gamepad objects here."""
-        self.driver_controller = components.DriverController(0)  # FIXME: this should not be a hardcoded port number
+        self.driver_controller = components.DriverController(const.ControllerPort.DRIVER_CONTROLLER)
 
     def createLights(self) -> None:
         """Set up CAN objects for lights."""
@@ -94,8 +96,14 @@ class Scurvy(magicbot.MagicRobot):
 
     def manuallyDrive(self) -> None:
         """Drive the robot based on controller input."""
-        # Translate joystick values to speeds
-        strafe_right, forward = self.driver_controller.getLeftStick()
-        rotate_right = self.driver_controller.getRightX()
-        self.drivetrain.drive(x_speed=-forward, y_speed=-strafe_right, r_speed=-rotate_right)
-        self.drivetrain.use_cross_brake(self.driver_controller.should_brake())
+        # Joystick values are positive to the right and down
+        strafe_right_percent, reverse_percent = self.driver_controller.getLeftStick()
+        rotate_right_percent = self.driver_controller.getRightX()
+
+        # We happen to need to invert every value from the joystick to get the desired robot motion
+        self.drivetrain.drive(
+            forward_speed=-reverse_percent * self.drivetrain.max_free_drive_meters_per_second,
+            left_speed=-strafe_right_percent * self.drivetrain.max_free_drive_meters_per_second,
+            ccw_speed=-rotate_right_percent * self.drivetrain.max_rotation_radians_per_second,
+        )
+        self.drivetrain.cross_brake = self.driver_controller.should_brake()
