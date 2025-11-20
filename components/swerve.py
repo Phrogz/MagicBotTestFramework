@@ -57,7 +57,7 @@ class SwerveModule:
     @desired_state.setter
     def desired_state(self, state: kinematics.SwerveModuleState) -> None:
         """Set the desired state, optimizing the rotation."""
-        kinematics.SwerveModuleState.optimize(state, geom.Rotation2d(self.steering_angle))
+        state.optimize(geom.Rotation2d(self.steering_angle))
         self._desired_state = state
 
     @property
